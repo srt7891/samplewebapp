@@ -3,7 +3,8 @@ pipeline {
     stages{
         stage ('Code Download From SCM'){
             steps{
-                git 'https://github.com/hairavi10/gameoflifeondocker.git'
+                git 'https://github.com/srt7891/samplewebapp.git'
+                sh 'cd gameoflifeondocker-master/'
                 stash name: 'Dockerfile', includes: 'Dockerfile'
             }
         }
