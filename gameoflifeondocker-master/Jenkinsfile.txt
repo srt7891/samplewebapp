@@ -4,7 +4,8 @@ pipeline {
         stage ('Code Download From SCM'){
             steps{
                 git 'https://github.com/srt7891/samplewebapp.git'
-                sh 'cd gameoflifeondocker-master/game-of-life/gameoflife-build/
+                dir ('gameoflifeondocker-master/game-of-life/gameoflife-build/')
+                mvn -x clean package
             }
         }
         }
