@@ -5,7 +5,7 @@ pipeline {
             steps{
                 git 'https://github.com/srt7891/samplewebapp.git'
                 sh 'cd gameoflifeondocker-master/game-of-life/gameoflife-build/'
-                mvn -x clean package
+                mvn package
             }
         }
         }
