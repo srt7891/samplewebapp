@@ -1,14 +1,17 @@
-pipeline { 
+pipeline {
     agent any
-    stages{
-        stage ('Code Download From SCM'){
-            steps{
-                git 'https://github.com/srt7891/samplewebapp.git'
-                dir ('gameoflifeondocker-master/game-of-life/gameoflife-build/'){
+    stages {
+        stage('Build') {
+            agent {
+                docker {
+                    image 'gradle:6.7-jdk11'
+                    // Run the container on the node specified at the top-level of the Pipeline, in the same workspace, rather than on a new node entirely:
+                    reuseNode true
                 }
-                mvn -x clean package
+            }
+            steps {
+                sh 'gradle --version'
             }
         }
-        }
-        
-    } 
+    }
+}
