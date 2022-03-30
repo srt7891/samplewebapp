@@ -4,22 +4,10 @@ pipeline {
         stage ('Code Download From SCM'){
             steps{
                 git 'https://github.com/srt7891/samplewebapp.git'
-                sh 'cd gameoflifeondocker-master/'
-                stash name: 'Dockerfile', includes: 'Dockerfile'
+                sh 'cd gameoflifeondocker-master/game-of-life/gameoflife-build/'
+                mvn -x clean package
             }
         }
-        stage('GOF Docker Run'){
-            agent any
-            steps{
-                dir('/home/jenkins'){
-                      unstash name: 'Dockerfile'                                                                                           
-                }   
-                sh '''
-                   docker image build -t gameoflife:05.20 /home/jenkins
-                   docker run -d -p 8081:8080 gameoflife:05.20
-                   '''
-            }
         }
         
-    }
-}  
+    } 
